@@ -164,5 +164,6 @@ if the backend is not running!
 
 
 
+<img width="971" height="690" alt="image" src="https://github.com/user-attachments/assets/b3ae8b58-6ce9-4182-8c25-03625a40b1f5" />
 
 
