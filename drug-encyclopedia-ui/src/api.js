@@ -1,9 +1,15 @@
+// export async function searchDrugs({ question, type }) {
+//   const endpoint =
+//     type === "homeopathic"
+//       ? "http://127.0.0.1:8000/ask/homeopathic"
+//       : "http://127.0.0.1:8000/ask/prescription";
+const BASE_URL = "https://ba11-2401-4900-4fe4-52c5-6555-499e-f5f3-2528.ngrok-free.app";
+
 export async function searchDrugs({ question, type }) {
   const endpoint =
     type === "homeopathic"
-      ? "http://127.0.0.1:8000/ask/homeopathic"
-      : "http://127.0.0.1:8000/ask/prescription";
-
+      ? `${BASE_URL}/ask/homeopathic`
+      : `${BASE_URL}/ask/prescription`;
   const res = await fetch(endpoint, {
     method: "POST",
     headers: {
