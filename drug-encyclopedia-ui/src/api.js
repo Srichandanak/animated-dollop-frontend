@@ -1,22 +1,32 @@
-const API_BASE = "http://localhost:8000";
+export async function searchDrugs({ question, type }) {
+  const endpoint =
+    type === "homeopathic"
+      ? "http://127.0.0.1:8000/ask/homeopathic"
+      : "http://127.0.0.1:8000/ask/prescription";
 
-export async function fetchFilters() {
-  const res = await fetch(`${API_BASE}/filters`);
-  if (!res.ok) throw new Error("Failed to fetch filters");
-  return res.json();
-}
-
-export async function searchDrugs(payload) {
-  const res = await fetch(`${API_BASE}/ask`, {
+  const res = await fetch(endpoint, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload),
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ query: question })
   });
 
   if (!res.ok) {
-    const text = await res.text();
-    throw new Error(text);
+    throw new Error("Failed to fetch data");
   }
 
   return res.json();
+}
+
+export async function clinicalQuery(question) {
+  const response = await fetch(
+    `http://localhost:8000/ask/prescription/clinical?q=${encodeURIComponent(question)}`
+  );
+
+  if (!response.ok) {
+    throw new Error("Clinical query failed");
+  }
+
+  return response.json();
 }
